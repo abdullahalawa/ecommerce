@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/freshcart-logo.svg";
 
 export default function Navbar() {
@@ -13,16 +14,16 @@ export default function Navbar() {
 
           <ul className="flex gap-6 items-center">
             <li>
-              <a href="/">Home</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a href="/">Products</a>
+              <NavLink to="/products">Products</NavLink>
             </li>
             <li>
-              <a href="/">Categories</a>
+              <NavLink to="/categories">Categories</NavLink>
             </li>
             <li>
-              <a href="/">Brands</a>
+              <NavLink to="/brands">Brands</NavLink>
             </li>
           </ul>
 
@@ -60,11 +61,11 @@ export default function Navbar() {
 
           <ul className="flex gap-6 items-center">
             <li>
-              <a href="/login">Login</a>
+              <NavLink to="/login">Login</NavLink>
             </li>
 
             <li>
-              <a href="/signup">Sign up</a>
+              <NavLink to="/signup">Sign up</NavLink>
             </li>
 
             <li>
