@@ -3,6 +3,7 @@ import Layout from "./Components/Layout/Layout";
 import NotFound from "./Pages/NotFound/NotFound";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const routes = createBrowserRouter([
@@ -20,6 +21,7 @@ function App() {
   return (
     <>
       <RouterProvider router={routes}></RouterProvider>
+      <Toaster />
     </>
   );
 }

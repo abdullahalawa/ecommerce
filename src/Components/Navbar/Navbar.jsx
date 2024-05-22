@@ -4,7 +4,7 @@ import logo from "../../assets/images/freshcart-logo.svg";
 export default function Navbar() {
   return (
     <>
-      <nav className="bg-slate-100 p-3">
+      <nav className="bg-slate-100 p-3 fixed left-0 right-0 top-0 z-50">
         <div className="container  flex gap-8">
           <h1>
             <a href="/">

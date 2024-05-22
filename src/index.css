@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +10,10 @@
   }
 
   .btn-primary {
-    @apply px-4 py-2 uppercase text-white bg-primary rounded-md;
+    @apply px-4 py-2 w-fit uppercase text-white bg-primary rounded-md;
   }
+}
+
+body {
+  font-family: "Encode Sans Expanded", sans-serif;
 }
