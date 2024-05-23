@@ -14,16 +14,52 @@ export default function Navbar() {
 
           <ul className="flex gap-6 items-center">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                    isActive ? "font-bold before:w-full" : "before:w-0"
+                  }`;
+                }}
+                to="/"
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/products">Products</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                    isActive ? "font-bold before:w-full" : "before:w-0"
+                  }`;
+                }}
+                to="/products"
+              >
+                Products
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/categories">Categories</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                    isActive ? "font-bold before:w-full" : "before:w-0"
+                  }`;
+                }}
+                to="/categories"
+              >
+                Categories
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/brands">Brands</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                    isActive ? "font-bold before:w-full" : "before:w-0"
+                  }`;
+                }}
+                to="/brands"
+              >
+                Brands
+              </NavLink>
             </li>
           </ul>
 
@@ -61,11 +97,29 @@ export default function Navbar() {
 
           <ul className="flex gap-6 items-center">
             <li>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                    isActive ? "font-bold before:w-full" : "before:w-0"
+                  }`;
+                }}
+                to="/login"
+              >
+                Login
+              </NavLink>
             </li>
 
             <li>
-              <NavLink to="/signup">Sign up</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                    isActive ? "font-bold before:w-full" : "before:w-0"
+                  }`;
+                }}
+                to="/signup"
+              >
+                Sign up
+              </NavLink>
             </li>
 
             <li>
