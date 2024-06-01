@@ -103,7 +103,7 @@ export default function Navbar() {
                     isActive ? "font-bold before:w-full" : "before:w-0"
                   }`;
                 }}
-                to="/login"
+                to="/auth/login"
               >
                 Login
               </NavLink>
@@ -116,7 +116,7 @@ export default function Navbar() {
                     isActive ? "font-bold before:w-full" : "before:w-0"
                   }`;
                 }}
-                to="/signup"
+                to="/auth/signup"
               >
                 Sign up
               </NavLink>

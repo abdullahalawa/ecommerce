@@ -2,6 +2,8 @@ import axios from "axios";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
+import CategorySlider from "../../Components/CategorySlider/CategorySlider";
+import HomeSlider from "./../../Components/HomeSlider/HomeSlider";
 
 export default function Home() {
   const [products, setProducts] = useState(null);
@@ -18,12 +20,13 @@ export default function Home() {
 
   useEffect(() => {
     getProducts();
-
-    return () => {};
   }, []);
 
   return (
     <>
+      <HomeSlider />
+      <CategorySlider />
+
       {products ? (
         <div className="grid grid-cols-12 gap-8">
           {products.map((product) => (

@@ -61,7 +61,7 @@ export default function Register() {
 
       setTimeout(() => {
         if (data.message == "success") {
-          navigate("/login");
+          navigate("/auth/login");
         }
       }, 3000);
     } catch (error) {
