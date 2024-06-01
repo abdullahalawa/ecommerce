@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/freshcart-logo.svg";
+import { userContext } from "../../Context/User.context";
+import { useContext } from "react";
 
 export default function Navbar() {
+  const { token, logOut } = useContext(userContext);
+
   return (
     <>
       <nav className="bg-slate-100 p-3 fixed left-0 right-0 top-0 z-50">
@@ -12,56 +16,60 @@ export default function Navbar() {
             </a>
           </h1>
 
-          <ul className="flex gap-6 items-center">
-            <li>
-              <NavLink
-                className={({ isActive }) => {
-                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                    isActive ? "font-bold before:w-full" : "before:w-0"
-                  }`;
-                }}
-                to="/"
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) => {
-                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                    isActive ? "font-bold before:w-full" : "before:w-0"
-                  }`;
-                }}
-                to="/products"
-              >
-                Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) => {
-                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                    isActive ? "font-bold before:w-full" : "before:w-0"
-                  }`;
-                }}
-                to="/categories"
-              >
-                Categories
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) => {
-                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                    isActive ? "font-bold before:w-full" : "before:w-0"
-                  }`;
-                }}
-                to="/brands"
-              >
-                Brands
-              </NavLink>
-            </li>
-          </ul>
+          {token ? (
+            <ul className="flex gap-6 items-center">
+              <li>
+                <NavLink
+                  className={({ isActive }) => {
+                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                      isActive ? "font-bold before:w-full" : "before:w-0"
+                    }`;
+                  }}
+                  to="/"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) => {
+                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                      isActive ? "font-bold before:w-full" : "before:w-0"
+                    }`;
+                  }}
+                  to="/products"
+                >
+                  Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) => {
+                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                      isActive ? "font-bold before:w-full" : "before:w-0"
+                    }`;
+                  }}
+                  to="/categories"
+                >
+                  Categories
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) => {
+                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                      isActive ? "font-bold before:w-full" : "before:w-0"
+                    }`;
+                  }}
+                  to="/brands"
+                >
+                  Brands
+                </NavLink>
+              </li>
+            </ul>
+          ) : (
+            ""
+          )}
 
           <ul className="flex gap-6 items-center ms-auto">
             <li>
@@ -96,37 +104,41 @@ export default function Navbar() {
           </ul>
 
           <ul className="flex gap-6 items-center">
-            <li>
-              <NavLink
-                className={({ isActive }) => {
-                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                    isActive ? "font-bold before:w-full" : "before:w-0"
-                  }`;
-                }}
-                to="/auth/login"
-              >
-                Login
-              </NavLink>
-            </li>
+            {!token ? (
+              <>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/auth/login"
+                  >
+                    Login
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                className={({ isActive }) => {
-                  return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                    isActive ? "font-bold before:w-full" : "before:w-0"
-                  }`;
-                }}
-                to="/auth/signup"
-              >
-                Sign up
-              </NavLink>
-            </li>
-
-            <li>
-              <a href="">
-                <i className="fa-solid fa-right-from-bracket text-2xl"></i>
-              </a>
-            </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/auth/signup"
+                  >
+                    Sign up
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <li className="cursor-pointer">
+                <span onClick={logOut}>
+                  <i className="fa-solid fa-right-from-bracket text-2xl"></i>
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

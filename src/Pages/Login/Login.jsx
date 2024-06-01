@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { userContext } from "../../Context/User.context";
 
 export default function Login() {
   const navigate = useNavigate();
-
+  const { token, setToken } = useContext(userContext);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const validationSchema = Yup.object({
@@ -43,6 +44,8 @@ export default function Login() {
 
       setTimeout(() => {
         if (data.message == "success") {
+          localStorage.setItem("token", data.token);
+          setToken(data.token);
           navigate("/");
         }
       }, 3000);

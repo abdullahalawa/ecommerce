@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { register } from "swiper/element/bundle";
 import Home from "./Pages/Home/Home";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import UserProvider from "./Context/User.context";
 
 register();
 
@@ -39,8 +40,10 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={routes}></RouterProvider>
-      <Toaster />
+      <UserProvider>
+        <RouterProvider router={routes}></RouterProvider>
+        <Toaster />
+      </UserProvider>
     </>
   );
 }
