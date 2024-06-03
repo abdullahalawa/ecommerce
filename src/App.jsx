@@ -8,6 +8,7 @@ import { register } from "swiper/element/bundle";
 import Home from "./Pages/Home/Home";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import UserProvider from "./Context/User.context";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 
 register();
 
@@ -24,6 +25,7 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "category/:id", element: <h2>Category</h2> },
+        { path: "product/:id", element: <ProductDetails /> },
         { path: "*", element: <NotFound /> },
       ],
     },

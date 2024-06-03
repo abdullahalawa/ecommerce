@@ -4,7 +4,6 @@ import { userContext } from "../../Context/User.context";
 
 export default function ProtectedRoute({ children }) {
   const { token } = useContext(userContext);
-  console.log(token);
 
   if (token) {
     return children;
