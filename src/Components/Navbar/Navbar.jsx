@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/freshcart-logo.svg";
 import { userContext } from "../../Context/User.context";
 import { useContext } from "react";
@@ -71,7 +71,14 @@ export default function Navbar() {
             ""
           )}
 
-          <ul className="flex gap-6 items-center ms-auto">
+          <Link to={"/cart"} className="ms-auto relative">
+            <i className="fa-solid fa-cart-shopping text-lg"></i>
+            <span className="bg-primary absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 text-sm font-bold text-white flex justify-center items-center rounded-full">
+              0
+            </span>
+          </Link>
+
+          <ul className="flex gap-6 items-center ">
             <li>
               <a href="https://www.facebook.com">
                 <i className="fa-brands fa-facebook"></i>

@@ -9,6 +9,8 @@ import Home from "./Pages/Home/Home";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import UserProvider from "./Context/User.context";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import Cart from "./Pages/Cart/Cart";
+import CartProvider from "./Context/Cart.context";
 
 register();
 
@@ -26,6 +28,7 @@ function App() {
         { index: true, element: <Home /> },
         { path: "category/:id", element: <h2>Category</h2> },
         { path: "product/:id", element: <ProductDetails /> },
+        { path: "/cart", element: <Cart /> },
         { path: "*", element: <NotFound /> },
       ],
     },
@@ -43,8 +46,10 @@ function App() {
   return (
     <>
       <UserProvider>
-        <RouterProvider router={routes}></RouterProvider>
-        <Toaster />
+        <CartProvider>
+          <RouterProvider router={routes}></RouterProvider>
+          <Toaster />
+        </CartProvider>
       </UserProvider>
     </>
   );
