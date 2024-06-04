@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import ImageGallery from "react-image-gallery";
+import { cartContext } from "../../Context/Cart.context";
 
 export default function ProductDetails() {
   const [details, setDetails] = useState(null);
+  const { addProductToCart } = useContext(cartContext);
   const { id } = useParams();
 
   async function getProductDetails() {
@@ -55,7 +57,14 @@ export default function ProductDetails() {
                 {details.ratingsAverage}
               </span>
             </div>
-            <button className="btn-primary w-full mt-4">Add To Cart</button>
+            <button
+              onClick={() => {
+                addProductToCart({ id: details.id });
+              }}
+              className="btn-primary w-full mt-4"
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       )}

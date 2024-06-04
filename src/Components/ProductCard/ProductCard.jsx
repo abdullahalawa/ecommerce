@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { cartContext } from "../../Context/Cart.context";
 
 export default function ProductCard({ productInfo }) {
   const { images, title, price, category, ratingAverage, id } = productInfo;
+  const { addProductToCart } = useContext(cartContext);
 
   return (
     <>
@@ -14,7 +17,12 @@ export default function ProductCard({ productInfo }) {
               <i className="fa-solid fa-heart"></i>
             </div>
 
-            <div className="icon cursor-pointer hover:scale-110 transition-transform duration-300 hover:rotate-6 w-10 h-10 rounded-full bg-primary text-sm text-white flex justify-center items-center">
+            <div
+              onClick={() => {
+                addProductToCart({ id });
+              }}
+              className="icon cursor-pointer hover:scale-110 transition-transform duration-300 hover:rotate-6 w-10 h-10 rounded-full bg-primary text-sm text-white flex justify-center items-center"
+            >
               <i className="fa-solid fa-cart-shopping"></i>
             </div>
 
