@@ -11,6 +11,7 @@ import UserProvider from "./Context/User.context";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
 import CartProvider from "./Context/Cart.context";
+import Checkout from "./Pages/Checkout/Checkout";
 
 register();
 
@@ -29,6 +30,7 @@ function App() {
         { path: "category/:id", element: <h2>Category</h2> },
         { path: "product/:id", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
+        { path: "/checkout", element: <Checkout /> },
         { path: "*", element: <NotFound /> },
       ],
     },

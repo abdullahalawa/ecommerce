@@ -1,10 +1,16 @@
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/freshcart-logo.svg";
 import { userContext } from "../../Context/User.context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { cartContext } from "../../Context/Cart.context";
 
 export default function Navbar() {
   const { token, logOut } = useContext(userContext);
+  const { getCartInfo, cartInfo } = useContext(cartContext);
+
+  useEffect(() => {
+    getCartInfo();
+  }, []);
 
   return (
     <>
@@ -74,7 +80,11 @@ export default function Navbar() {
           <Link to={"/cart"} className="ms-auto relative">
             <i className="fa-solid fa-cart-shopping text-lg"></i>
             <span className="bg-primary absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 text-sm font-bold text-white flex justify-center items-center rounded-full">
-              0
+              {cartInfo === null ? (
+                <i className="fa-solid fa-spinner fa-spin"></i>
+              ) : (
+                cartInfo.numOfCartItems || 0
+              )}
             </span>
           </Link>
 
