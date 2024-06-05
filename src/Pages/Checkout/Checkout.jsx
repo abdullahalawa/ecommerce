@@ -1,24 +1,60 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { cartContext } from "../../Context/Cart.context";
+import { userContext } from "../../Context/User.context";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
+  const { cartInfo, setCartInfo } = useContext(cartContext);
+  const { token } = useContext(userContext);
+  const [orderType, setOrderType] = useState(null);
 
-    const {cartInfo} = useContext(cartContext)
+  // handle Cach Order
+  async function createCashOrder(values) {
+    console.log("######## Cash######");
+    const options = {
+      url: `https://ecommerce.routemisr.com/api/v1/orders/${cartInfo.data._id}`,
+      method: "POST",
+      headers: {
+        token,
+      },
+      data: {
+        values,
+      },
+    };
 
+    let { data } = await axios.request(options);
 
-    function createCashOrder(){
-        
+    console.log(data);
 
-        const options = {
-            url: `https://ecommerce.routemisr.com/api/v1/orders/${}`,
-            method: ""
-        }
+    setCartInfo([]);
+  }
 
+  // handle online Order
+  async function createOnlineOrder(values) {
+    console.log("######## Online ######");
+    const options = {
+      url: `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartInfo.data._id}?url=http://localhost:5173`,
+      method: "POST",
+      headers: {
+        token,
+      },
+      data: {
+        values,
+      },
+    };
+
+    let { data } = await axios.request(options);
+
+    console.log(data);
+
+    toast.loading("redirect to payment gateway...");
+
+    if (data.status === "success") {
+      window.location.href = data.session.url;
     }
-
-
-
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +66,11 @@ export default function Checkout() {
     },
 
     onSubmit: (values) => {
-      console.log(values);
+      if (orderType === "cash") {
+        createCashOrder(values);
+      } else {
+        createOnlineOrder(values);
+      }
     },
   });
 
@@ -62,10 +102,22 @@ export default function Checkout() {
           value={formik.values.shippingAddress.details}
           onChange={formik.handleChange}
         ></textarea>
-        <button type="submit" className="btn-primary bg-blue-500 mr-4">
+        <button
+          onClick={() => {
+            setOrderType("cash");
+          }}
+          type="submit"
+          className="btn-primary bg-blue-500 mr-4"
+        >
           Cash Order
         </button>
-        <button type="submit" className="btn-primary">
+        <button
+          onClick={() => {
+            setOrderType("online");
+          }}
+          type="submit"
+          className="btn-primary"
+        >
           Online Order
         </button>
       </form>

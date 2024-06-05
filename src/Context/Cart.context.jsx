@@ -125,6 +125,7 @@ export default function CartProvider({ children }) {
         removeProductFromCart,
         updateProductCount,
         clearCart,
+        setCartInfo,
       }}
     >
       {children}
