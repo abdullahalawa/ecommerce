@@ -43,6 +43,7 @@ export default function CartProvider({ children }) {
       };
       const { data } = await axios.request(options);
       setCartInfo(data);
+      console.log(data);
     } catch (error) {
       if (error.response.data.message.includes("No cart")) {
         setCartInfo([]);

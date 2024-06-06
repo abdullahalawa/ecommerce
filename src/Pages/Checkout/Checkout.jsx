@@ -4,11 +4,13 @@ import { cartContext } from "../../Context/Cart.context";
 import { userContext } from "../../Context/User.context";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const { cartInfo, setCartInfo } = useContext(cartContext);
   const { token } = useContext(userContext);
   const [orderType, setOrderType] = useState(null);
+  const navigate = useNavigate();
 
   // handle Cach Order
   async function createCashOrder(values) {
@@ -28,7 +30,11 @@ export default function Checkout() {
 
     console.log(data);
 
+    toast.success("Cash Order Submited Successfully");
+
     setCartInfo([]);
+
+    navigate("/cart");
   }
 
   // handle online Order
