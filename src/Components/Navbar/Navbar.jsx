@@ -8,6 +8,8 @@ export default function Navbar() {
   const { token, logOut } = useContext(userContext);
   const { getCartInfo, cartInfo } = useContext(cartContext);
 
+  // getCartInfo();
+
   useEffect(() => {
     getCartInfo();
   }, []);
