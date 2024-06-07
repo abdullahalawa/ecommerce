@@ -12,6 +12,11 @@ import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
 import CartProvider from "./Context/Cart.context";
 import Checkout from "./Pages/Checkout/Checkout";
+import AllOrders from "./Pages/AllOrders/AllOrders";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
+import Products from "./Pages/Products/Products";
+import { Offline, Online } from "react-detect-offline";
 
 register();
 
@@ -27,9 +32,11 @@ function App() {
 
       children: [
         { index: true, element: <Home /> },
-        { path: "category/:id", element: <h2>Category</h2> },
-        { path: "product/:id", element: <ProductDetails /> },
+        { path: "/products", element: <Products /> },
+        { path: "/category/:id", element: <h2>Category</h2> },
+        { path: "/product/:id", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
+        { path: "/allorders", element: <AllOrders /> },
         { path: "/checkout", element: <Checkout /> },
         { path: "*", element: <NotFound /> },
       ],
@@ -45,14 +52,22 @@ function App() {
     },
   ]);
 
+  const myClient = new QueryClient();
+
   return (
     <>
-      <UserProvider>
-        <CartProvider>
-          <RouterProvider router={routes}></RouterProvider>
-          <Toaster />
-        </CartProvider>
-      </UserProvider>
+      <Online>
+        <QueryClientProvider client={myClient}>
+          <UserProvider>
+            <CartProvider>
+              <RouterProvider router={routes}></RouterProvider>
+              <ReactQueryDevtools></ReactQueryDevtools>
+              <Toaster />
+            </CartProvider>
+          </UserProvider>
+        </QueryClientProvider>
+      </Online>
+      <Offline>User is offline</Offline>
     </>
   );
 }

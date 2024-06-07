@@ -34,7 +34,7 @@ export default function Checkout() {
 
     setCartInfo([]);
 
-    navigate("/cart");
+    navigate("/allorders");
   }
 
   // handle online Order

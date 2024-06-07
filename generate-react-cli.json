@@ -27,6 +27,17 @@
       "withTest": false,
       "withStory": false,
       "withLazy": false
+    },
+
+    "hook": {
+      "customTemplates": {
+        "component": "Template/TemplateName.jsx"
+      },
+      "path": "src/Hooks",
+      "withStyle": false,
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false
     }
   }
 }

@@ -4,38 +4,32 @@ import { useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import CategorySlider from "../../Components/CategorySlider/CategorySlider";
 import HomeSlider from "./../../Components/HomeSlider/HomeSlider";
+import { useQuery } from "@tanstack/react-query";
+import UseProducts from "../../Hooks/useProducts/useProducts";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
-  const [products, setProducts] = useState(null);
+  const { isLoading, data, isFetching, isError, error } = UseProducts();
 
-  async function getProducts() {
-    const options = {
-      url: "https://ecommerce.routemisr.com/api/v1/products",
-      method: "GET",
-    };
-
-    const { data } = await axios.request(options);
-    setProducts(data.data);
+  if (isLoading) {
+    return <Loading />;
   }
-
-  useEffect(() => {
-    getProducts();
-  }, []);
 
   return (
     <>
+      <Helmet>
+        <title>Home</title>
+        <meta name="description" content="Welcome to homepage" />
+      </Helmet>
+
       <HomeSlider />
       <CategorySlider />
 
-      {products ? (
-        <div className="grid grid-cols-12 gap-8">
-          {products.map((product) => (
-            <ProductCard productInfo={product} key={product._id} />
-          ))}
-        </div>
-      ) : (
-        <Loading />
-      )}
+      <div className="grid grid-cols-12 gap-8">
+        {data.data.data.map((product) => (
+          <ProductCard productInfo={product} key={product._id} />
+        ))}
+      </div>
     </>
   );
 }
