@@ -17,6 +17,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import Products from "./Pages/Products/Products";
 import { Offline, Online } from "react-detect-offline";
+import Categories from "./Pages/Categories/Categories";
+import Brands from "./Pages/Brands/Brands";
+import FavoriteProvider from "./Context/Favorite.context";
 
 register();
 
@@ -33,6 +36,8 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "/products", element: <Products /> },
+        { path: "/categories", element: <Categories /> },
+        { path: "/brands", element: <Brands /> },
         { path: "/category/:id", element: <h2>Category</h2> },
         { path: "/product/:id", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
@@ -60,9 +65,11 @@ function App() {
         <QueryClientProvider client={myClient}>
           <UserProvider>
             <CartProvider>
-              <RouterProvider router={routes}></RouterProvider>
-              <ReactQueryDevtools></ReactQueryDevtools>
-              <Toaster />
+              <FavoriteProvider>
+                <RouterProvider router={routes}></RouterProvider>
+                <ReactQueryDevtools></ReactQueryDevtools>
+                <Toaster />
+              </FavoriteProvider>
             </CartProvider>
           </UserProvider>
         </QueryClientProvider>
