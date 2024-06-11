@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cartContext } from "../../Context/Cart.context";
+import { favoritContext } from "../../Context/Favorite.context";
 
 export default function ProductCard({ productInfo }) {
   const { images, title, price, category, ratingAverage, id } = productInfo;
   const { addProductToCart } = useContext(cartContext);
+  const { addToFavorite } = useContext(favoritContext);
 
   return (
     <>
@@ -12,7 +14,12 @@ export default function ProductCard({ productInfo }) {
         <div className="relative">
           <img className="w-full" src={images[0]} alt="" />
 
-          <div className="layer opacity-0 hover:opacity-100 transition-opacity duration-300 absolute w-full h-full left-0 top-0 bg-black bg-opacity-15 flex gap-2 items-center justify-center">
+          <div
+            onClick={() => {
+              addToFavorite({ id });
+            }}
+            className="layer opacity-0 hover:opacity-100 transition-opacity duration-300 absolute w-full h-full left-0 top-0 bg-black bg-opacity-15 flex gap-2 items-center justify-center"
+          >
             <div className="icon cursor-pointer hover:scale-110 transition-transform duration-300 hover:rotate-6 w-10 h-10 rounded-full bg-primary text-sm text-white flex justify-center items-center">
               <i className="fa-solid fa-heart"></i>
             </div>

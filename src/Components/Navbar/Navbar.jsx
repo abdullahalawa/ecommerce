@@ -87,6 +87,19 @@ export default function Navbar() {
                   Orders
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink
+                  className={({ isActive }) => {
+                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                      isActive ? "font-bold before:w-full" : "before:w-0"
+                    }`;
+                  }}
+                  to="/wishlist"
+                >
+                  Wishlist
+                </NavLink>
+              </li>
             </ul>
           ) : (
             ""

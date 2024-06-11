@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import UseOnlineStatus from "../../Hooks/useOnlineStatus/useOnlineStatus";
 import UseProducts from "../../Hooks/useProducts/useProducts";
+import { favoritContext } from "../../Context/Favorite.context";
 
 export default function Products() {
   const { isLoading, data, isFetching, isError, error } = UseProducts();
@@ -16,6 +17,8 @@ export default function Products() {
   if (isError) {
     return <h2>Error</h2>;
   }
+
+  console.log();
 
   return (
     <>

@@ -20,6 +20,7 @@ import { Offline, Online } from "react-detect-offline";
 import Categories from "./Pages/Categories/Categories";
 import Brands from "./Pages/Brands/Brands";
 import FavoriteProvider from "./Context/Favorite.context";
+import Wishlist from "./Pages/Wishlist/Wishlist";
 
 register();
 
@@ -41,6 +42,7 @@ function App() {
         { path: "/category/:id", element: <h2>Category</h2> },
         { path: "/product/:id", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
+        { path: "/wishlist", element: <Wishlist /> },
         { path: "/allorders", element: <AllOrders /> },
         { path: "/checkout", element: <Checkout /> },
         { path: "*", element: <NotFound /> },
