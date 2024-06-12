@@ -22,13 +22,9 @@ export default function FavoriteProvider({ children }) {
         },
       };
 
-      const { data } = await axios.request(options);
-
+      let { data } = await axios.request(options);
       setFavoriteInfo(data);
-
       toast.success("Product Added to wishlist");
-
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -38,17 +34,35 @@ export default function FavoriteProvider({ children }) {
     try {
       const options = {
         url: "https://ecommerce.routemisr.com/api/v1/wishlist",
-        method: "POST",
+        method: "GET",
         headers: {
           token,
         },
       };
 
-      const { data } = await axios.request(options);
+      let { data } = await axios.request(options);
+
+      setFavoriteInfo(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function removeProductFromWhishlist({ id }) {
+    try {
+      const options = {
+        url: `https://ecommerce.routemisr.com/api/v1/wishlist/${id}`,
+        method: "DELETE",
+        headers: {
+          token,
+        },
+      };
+
+      let { data } = await axios.request(options);
 
       setFavoriteInfo(data);
 
-      console.log(data);
+      toast.success("Product Deleted from Whishlist Successfully");
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +70,12 @@ export default function FavoriteProvider({ children }) {
 
   return (
     <favoritContext.Provider
-      value={{ favoriteInfo, addToFavorite, getLoggedInFavorite }}
+      value={{
+        favoriteInfo,
+        addToFavorite,
+        getLoggedInFavorite,
+        removeProductFromWhishlist,
+      }}
     >
       {children}
     </favoritContext.Provider>

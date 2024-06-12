@@ -6,7 +6,7 @@ import CategorySlider from "../../Components/CategorySlider/CategorySlider";
 import HomeSlider from "./../../Components/HomeSlider/HomeSlider";
 import { useQuery } from "@tanstack/react-query";
 import UseProducts from "../../Hooks/useProducts/useProducts";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export default function Home() {
   const { isLoading, data, isFetching, isError, error } = UseProducts();
@@ -17,10 +17,12 @@ export default function Home() {
 
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-        <meta name="description" content="Welcome to homepage" />
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <title>Home</title>
+          <meta name="description" content="Welcome to homepage" />
+        </Helmet>
+      </HelmetProvider>
 
       <HomeSlider />
       <CategorySlider />
