@@ -14,8 +14,6 @@ export default function Wishlist() {
     getLoggedInFavorite();
   }, []);
 
-  console.log(favoriteInfo);
-
   return (
     <>
       {favoriteInfo === null ? (
@@ -24,10 +22,17 @@ export default function Wishlist() {
         <div className="bg-gray-100 p-8">
           <h1 className="text-2xl font-extrabold pb-8">My wish List</h1>
 
-          {favoriteInfo.data.map((wishListProduct) => {
-            return (
-              <>
-                <div className="flex justify-between items-center p-2 border-b-2 border-slate-200">
+          {favoriteInfo.data.length === 0 ? (
+            <div className="flex justify-center items-center py-16">
+              Your Wishlist is empty{" "}
+            </div>
+          ) : (
+            <>
+              {favoriteInfo.data.map((wishListProduct, i) => (
+                <div
+                  key={i}
+                  className="flex justify-between items-center p-2 border-b-2 border-slate-200"
+                >
                   <div className="flex justify-start items-center">
                     <div>
                       <img
@@ -47,7 +52,7 @@ export default function Wishlist() {
                         <span className="pr-1">
                           <i className="fa fa-trash"></i>
                         </span>
-                        <span
+                        <button
                           onClick={() => {
                             removeProductFromWhishlist({
                               id: wishListProduct._id,
@@ -55,7 +60,7 @@ export default function Wishlist() {
                           }}
                         >
                           Remove
-                        </span>
+                        </button>
                       </p>
                     </div>
                   </div>
@@ -65,9 +70,9 @@ export default function Wishlist() {
                     </button>
                   </div>
                 </div>
-              </>
-            );
-          })}
+              ))}
+            </>
+          )}
         </div>
       )}
     </>

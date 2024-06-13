@@ -60,8 +60,13 @@ export default function FavoriteProvider({ children }) {
 
       let { data } = await axios.request(options);
 
-      setFavoriteInfo(data);
+      if (data.length === 0) {
+        setFavoriteInfo([]);
+      } else {
+        getLoggedInFavorite();
+      }
 
+      console.log(data);
       toast.success("Product Deleted from Whishlist Successfully");
     } catch (error) {
       console.log(error);

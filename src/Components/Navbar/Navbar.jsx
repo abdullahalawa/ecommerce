@@ -3,6 +3,7 @@ import logo from "../../assets/images/freshcart-logo.svg";
 import { userContext } from "../../Context/User.context";
 import { useContext, useEffect } from "react";
 import { cartContext } from "../../Context/Cart.context";
+import { favoritContext } from "../../Context/Favorite.context";
 
 export default function Navbar() {
   const { token, logOut } = useContext(userContext);
