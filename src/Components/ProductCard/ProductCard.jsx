@@ -2,11 +2,13 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cartContext } from "../../Context/Cart.context";
 import { favoritContext } from "../../Context/Favorite.context";
+import Loading from "../Loading/Loading";
 
 export default function ProductCard({ productInfo }) {
   const { images, title, price, category, ratingAverage, id } = productInfo;
   const { addProductToCart } = useContext(cartContext);
-  const { addToFavorite } = useContext(favoritContext);
+  const { addToFavorite, getLoggedInFavorite, favoriteInfo } =
+    useContext(favoritContext);
 
   return (
     <>
@@ -21,7 +23,13 @@ export default function ProductCard({ productInfo }) {
               }}
               className="icon cursor-pointer hover:scale-110 transition-transform duration-300 hover:rotate-6 w-10 h-10 rounded-full bg-primary text-sm text-white flex justify-center items-center"
             >
-              <i className="fa-solid fa-heart"></i>
+              <i
+                className={favoriteInfo?.data.map((productfav) => {
+                  return productfav.id == id
+                    ? "fa-solid fa-heart text-red-400"
+                    : "fa-solid fa-heart text-white";
+                })}
+              ></i>
             </div>
 
             <div

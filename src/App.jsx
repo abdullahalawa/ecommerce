@@ -14,7 +14,7 @@ import CartProvider from "./Context/Cart.context";
 import Checkout from "./Pages/Checkout/Checkout";
 import AllOrders from "./Pages/AllOrders/AllOrders";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import Products from "./Pages/Products/Products";
 import { Offline, Online } from "react-detect-offline";
 import Categories from "./Pages/Categories/Categories";
@@ -75,7 +75,7 @@ function App() {
           <CartProvider>
             <FavoriteProvider>
               <RouterProvider router={routes}></RouterProvider>
-              <ReactQueryDevtools></ReactQueryDevtools>
+              {/* <ReactQueryDevtools></ReactQueryDevtools> */}
               <Toaster />
             </FavoriteProvider>
           </CartProvider>

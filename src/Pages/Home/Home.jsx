@@ -1,15 +1,23 @@
 import axios from "axios";
 import ProductCard from "../../Components/ProductCard/ProductCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import CategorySlider from "../../Components/CategorySlider/CategorySlider";
 import HomeSlider from "./../../Components/HomeSlider/HomeSlider";
 import { useQuery } from "@tanstack/react-query";
 import UseProducts from "../../Hooks/useProducts/useProducts";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { favoritContext } from "../../Context/Favorite.context";
 
 export default function Home() {
+  const [isFavorite, setIsFavorite] = useState([]);
   const { isLoading, data, isFetching, isError, error } = UseProducts();
+  const { addToFavorite, getLoggedInFavorite, favoriteInfo } =
+    useContext(favoritContext);
+
+  useEffect(() => {
+    getLoggedInFavorite();
+  }, []);
 
   if (isLoading) {
     return <Loading />;

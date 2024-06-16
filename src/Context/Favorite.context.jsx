@@ -42,6 +42,7 @@ export default function FavoriteProvider({ children }) {
 
       let { data } = await axios.request(options);
 
+      console.log(data);
       setFavoriteInfo(data);
     } catch (error) {
       console.log(error);
