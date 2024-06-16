@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { userContext } from "../../Context/User.context";
 
-export default function Login() {
+export default function ResetPassword() {
   const navigate = useNavigate();
   const { token, setToken } = useContext(userContext);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -16,7 +16,7 @@ export default function Login() {
       .required("email is required")
       .email("email is not valid"),
 
-    password: Yup.string()
+    newPassword: Yup.string()
       .required("password is required")
       .matches(
         /^[A-Z][0-9a-zA-Z]{5,25}$/,
@@ -24,13 +24,13 @@ export default function Login() {
       ),
   });
 
-  async function sendDataToLogin(values) {
+  async function resetPassword(values) {
     let id;
 
     try {
       const options = {
-        url: "https://ecommerce.routemisr.com/api/v1/auth/signin",
-        method: "POST",
+        url: "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
+        method: "PUT",
         data: values,
       };
 
@@ -40,10 +40,10 @@ export default function Login() {
       console.log(data);
 
       toast.dismiss(id);
-      toast.success("User Logged in successfuly");
+      toast.success("Your Password reset successfully");
 
       setTimeout(() => {
-        if (data.message == "success") {
+        if (data.token) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
           navigate("/");
@@ -59,12 +59,12 @@ export default function Login() {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
+      newPassword: "",
     },
 
     validationSchema,
 
-    onSubmit: sendDataToLogin,
+    onSubmit: resetPassword,
   });
 
   return (
@@ -72,7 +72,7 @@ export default function Login() {
       <section>
         <h2 className="text-2xl text-primary font-bold mb-6">
           <i className="fa-regular fa-circle-user me-3"></i>
-          <span>Login Now</span>
+          <span>Reset your password now!</span>
         </h2>
 
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
@@ -108,29 +108,23 @@ export default function Login() {
             <input
               type="password"
               className="form-control w-full"
-              placeholder="password"
-              name="password"
-              value={formik.values.password}
+              placeholder="newPassword"
+              name="newPassword"
+              value={formik.values.newPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
 
-            {formik.errors.password && formik.touched.password ? (
+            {formik.errors.newPassword && formik.touched.newPassword ? (
               <div className="text-red-600 font-semibold mt-2">
-                * {formik.errors.password}
+                * {formik.errors.newPassword}
               </div>
             ) : (
               ""
             )}
           </div>
-          <Link
-            to={"/auth/forget-password"}
-            className="self-start font-semibold"
-          >
-            Forget Your Password?
-          </Link>
           <button type="submit" className="btn-primary">
-            Login
+            Reset
           </button>
         </form>
       </section>

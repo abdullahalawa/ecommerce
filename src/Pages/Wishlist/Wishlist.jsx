@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { favoritContext } from "../../Context/Favorite.context";
 import Loading from "../../Components/Loading/Loading";
+import { cartContext } from "../../Context/Cart.context";
 
 export default function Wishlist() {
   const {
@@ -9,6 +10,8 @@ export default function Wishlist() {
     getLoggedInFavorite,
     removeProductFromWhishlist,
   } = useContext(favoritContext);
+
+  const { addProductToCart } = useContext(cartContext);
 
   useEffect(() => {
     getLoggedInFavorite();
@@ -65,7 +68,13 @@ export default function Wishlist() {
                     </div>
                   </div>
                   <div>
-                    <button className="btn-primary bg-white border border-primary text-black">
+                    <button
+                      onClick={() => {
+                        addProductToCart({ id: wishListProduct._id });
+                        removeProductFromWhishlist({ id: wishListProduct._id });
+                      }}
+                      className="btn-primary bg-white border border-primary text-black"
+                    >
                       add to Cart
                     </button>
                   </div>

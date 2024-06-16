@@ -26,98 +26,105 @@ export default function Navbar() {
           </h1>
 
           {token ? (
-            <ul className="flex gap-6 items-center">
-              <li>
-                <NavLink
-                  className={({ isActive }) => {
-                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                      isActive ? "font-bold before:w-full" : "before:w-0"
-                    }`;
-                  }}
-                  to="/"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) => {
-                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                      isActive ? "font-bold before:w-full" : "before:w-0"
-                    }`;
-                  }}
-                  to="/products"
-                >
-                  Products
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) => {
-                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                      isActive ? "font-bold before:w-full" : "before:w-0"
-                    }`;
-                  }}
-                  to="/categories"
-                >
-                  Categories
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) => {
-                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                      isActive ? "font-bold before:w-full" : "before:w-0"
-                    }`;
-                  }}
-                  to="/brands"
-                >
-                  Brands
-                </NavLink>
-              </li>
+            <>
+              <ul className="flex gap-6 items-center">
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/"
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/products"
+                  >
+                    Products
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/categories"
+                  >
+                    Categories
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/brands"
+                  >
+                    Brands
+                  </NavLink>
+                </li>
 
-              <li>
-                <NavLink
-                  className={({ isActive }) => {
-                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                      isActive ? "font-bold before:w-full" : "before:w-0"
-                    }`;
-                  }}
-                  to="/allorders"
-                >
-                  Orders
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/allorders"
+                  >
+                    Orders
+                  </NavLink>
+                </li>
 
-              <li>
-                <NavLink
-                  className={({ isActive }) => {
-                    return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
-                      isActive ? "font-bold before:w-full" : "before:w-0"
-                    }`;
-                  }}
-                  to="/wishlist"
-                >
-                  Wishlist
-                </NavLink>
-              </li>
-            </ul>
+                <li>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return `relative before:transition-all hover:before:w-full hover:font-bold before:h-[2px] before:bg-primary before:absolute before:left-0 before:-bottom-1 ${
+                        isActive ? "font-bold before:w-full" : "before:w-0"
+                      }`;
+                    }}
+                    to="/wishlist"
+                  >
+                    Wishlist
+                  </NavLink>
+                </li>
+              </ul>
+              <Link to={"/cart"} className="ms-auto relative">
+                <i className="fa-solid fa-cart-shopping text-lg"></i>
+                <span className="bg-primary absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 text-sm font-bold text-white flex justify-center items-center rounded-full">
+                  {cartInfo === null ? (
+                    <i className="fa-solid fa-spinner fa-spin"></i>
+                  ) : (
+                    cartInfo.numOfCartItems || 0
+                  )}
+                </span>
+              </Link>
+            </>
           ) : (
             ""
           )}
 
-          <Link to={"/cart"} className="ms-auto relative">
-            <i className="fa-solid fa-cart-shopping text-lg"></i>
-            <span className="bg-primary absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 text-sm font-bold text-white flex justify-center items-center rounded-full">
-              {cartInfo === null ? (
-                <i className="fa-solid fa-spinner fa-spin"></i>
-              ) : (
-                cartInfo.numOfCartItems || 0
-              )}
-            </span>
-          </Link>
-
-          <ul className="flex gap-6 items-center ">
+          <ul
+            className={
+              token
+                ? "flex gap-6 items-center"
+                : "flex gap-6 items-center ms-auto"
+            }
+          >
             <li>
               <a href="https://www.facebook.com">
                 <i className="fa-brands fa-facebook"></i>

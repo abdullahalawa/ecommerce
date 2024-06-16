@@ -21,6 +21,9 @@ import Categories from "./Pages/Categories/Categories";
 import Brands from "./Pages/Brands/Brands";
 import FavoriteProvider from "./Context/Favorite.context";
 import Wishlist from "./Pages/Wishlist/Wishlist";
+import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
+import VarifyResetCode from "./Pages/VarifyResetCode/VarifyResetCode";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 
 register();
 
@@ -55,6 +58,9 @@ function App() {
       children: [
         { path: "login", element: <Login /> },
         { path: "signup", element: <Register /> },
+        { path: "forget-password", element: <ForgetPassword /> },
+        { path: "verify-code", element: <VarifyResetCode /> },
+        { path: "reset-password", element: <ResetPassword /> },
       ],
     },
   ]);
@@ -63,20 +69,20 @@ function App() {
 
   return (
     <>
-      <Online>
-        <QueryClientProvider client={myClient}>
-          <UserProvider>
-            <CartProvider>
-              <FavoriteProvider>
-                <RouterProvider router={routes}></RouterProvider>
-                <ReactQueryDevtools></ReactQueryDevtools>
-                <Toaster />
-              </FavoriteProvider>
-            </CartProvider>
-          </UserProvider>
-        </QueryClientProvider>
-      </Online>
-      <Offline>User is offline</Offline>
+      {/* <Online> */}
+      <QueryClientProvider client={myClient}>
+        <UserProvider>
+          <CartProvider>
+            <FavoriteProvider>
+              <RouterProvider router={routes}></RouterProvider>
+              <ReactQueryDevtools></ReactQueryDevtools>
+              <Toaster />
+            </FavoriteProvider>
+          </CartProvider>
+        </UserProvider>
+      </QueryClientProvider>
+      {/* </Online> */}
+      {/* <Offline>User is offline</Offline> */}
     </>
   );
 }
