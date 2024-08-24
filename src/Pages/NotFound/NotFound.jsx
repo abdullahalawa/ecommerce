@@ -4,6 +4,7 @@ export default function NotFound() {
   return (
     <>
       <img src={notFoundImg} alt="error" className="mx-auto" />
+      test
     </>
   );
 }
